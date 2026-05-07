@@ -2,7 +2,7 @@ name: Weather JSON Generator
 
 on:
   schedule:
-    - cron: "59 23 * * *"
+    - cron: "30 13 * * *"
 
   workflow_dispatch:
 
