@@ -1,2 +1,0 @@
-# temperatures-actions
-temperatures-actions
