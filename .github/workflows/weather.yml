@@ -1,0 +1,38 @@
+name: Weather JSON Generator
+
+on:
+  schedule:
+    - cron: "59 23 * * *"
+
+  workflow_dispatch:
+
+jobs:
+  generate-weather:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clonar repositori
+      uses: actions/checkout@v4
+
+    - name: Configurar Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Instal·lar dependències
+      run: |
+        pip install -r requirements.txt
+
+    - name: Executar programa
+      run: python temperatures.py
+
+    - name: Configurar Git
+      run: |
+        git config user.name "github-actions"
+        git config user.email "github-actions@github.com"
+
+    - name: Afegir JSON al repo
+      run: |
+        git add *.json
+        git commit -m "Afegir dades meteorològiques automàtiques" || echo "No changes"
+        git push
